@@ -1,22 +1,24 @@
+package tasks;
+
 public class Task {
 
     int id;
-    String name;
-    String description;
-    String status;
+    protected String name;
+    protected String description;
+    protected String status; // Закрыт от изменения извне
 
-    static final String tStatNew = "NEW";
-    static final String tStatInPr = "IN_PROGRESS";
-    static final String tStatDone = "DONE";
+    public static final String tStatNew = "NEW";
+    public static final String tStatInPr = "IN_PROGRESS";
+    public static final String tStatDone = "DONE";
 
-    Task(int id, String name, String description) {
+    public Task(int id, String name, String description) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.status = tStatNew;
     }
 
-    Task(int id, String name, String description, String status) {
+    public Task(int id, String name, String description, String status) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -33,7 +35,7 @@ public class Task {
 
     @Override
     public String toString() {
-        return "Task{" +
+        return "tasks.Task{" +
                 "name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", id=" + id +
@@ -43,6 +45,10 @@ public class Task {
 
     public String getStatus() {
         return status;
+    }
+
+    public void setStatus(String status){
+        this.status = status;
     }
 
     public Integer getId() {
