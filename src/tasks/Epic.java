@@ -5,7 +5,7 @@ import java.util.HashMap;
 
 public class Epic extends Task {
 
-    HashMap<Integer, Subtask> subtasks;
+    private HashMap<Integer, Subtask> subtasks;
 
     public Epic(int id, String name, String description) {
         super(id, name, description);
@@ -42,8 +42,8 @@ public class Epic extends Task {
     }
 
     public void setSubtaskStatus(Integer id, String status) {
-        for(Integer i : subtasks.keySet()){
-            if (subtasks.get(i).getId()==id){
+        for (Integer i : subtasks.keySet()) {
+            if (subtasks.get(i).getId() == id) {
                 subtasks.get(i).setStatus(status);
             }
         }
@@ -55,7 +55,7 @@ public class Epic extends Task {
         examinationEpicStatus();
     }
 
-    public void showEpicInfo(){
+    public void showEpicInfo() {
         System.out.println("tasks.Epic{" +
                 " id=" + id +
                 ", name='" + this.getName() + '\'' +
@@ -63,12 +63,12 @@ public class Epic extends Task {
                 ", status='" + this.getStatus() + '\'' +
                 '}');
 
-        for (Integer i : subtasks.keySet()){
+        for (Integer i : subtasks.keySet()) {
             System.out.println("    " + subtasks.get(i));
         }
     }
 
-    private void examinationEpicStatus(){
+    private void examinationEpicStatus() {
         String tmpStatus = Task.tStatDone;
 
         for (Integer ik : subtasks.keySet()) {
@@ -92,7 +92,6 @@ public class Epic extends Task {
             if (!subtasks.get(ik).getStatus().equals(Task.tStatDone)) isDone = false;
         }
         if (isDone) tmpStatus = Task.tStatDone;
-
 
 
         if (subtasks.isEmpty()) tmpStatus = Task.tStatNew;

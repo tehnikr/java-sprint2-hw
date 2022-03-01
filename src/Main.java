@@ -31,7 +31,7 @@ public class Main {
 
 
         // Изменяем задачу 2
-        mgr.editTask(new Task(1,"Задача 2", "Измен Оп задачи 2", Task.tStatInPr));
+        mgr.editTask(new Task(1, "Задача 2", "Измен Оп задачи 2", Task.tStatInPr));
 
         System.out.println(mgr.getAllTasks());
 

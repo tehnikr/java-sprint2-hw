@@ -11,8 +11,8 @@ public class Manager {
 
     private int taskCount = 0;
 
-    HashMap<Integer, Task> Tasks;
-    HashMap<Integer, Epic> Epics;
+    private HashMap<Integer, Task> Tasks;
+    private HashMap<Integer, Epic> Epics;
 
     public Manager() {
         Tasks = new HashMap<>();
@@ -28,15 +28,15 @@ public class Manager {
 
     // 2.5 Обновление. Новая версия объекта с верным идентификатором передаются в виде параметра
     // Это нужно?
-    public void editTask(Task task){
-        Tasks.put(task.getId(),task);
+    public void editTask(Task task) {
+        Tasks.put(task.getId(), task);
     }
 
-    public void editEpic(Epic epic){
+    public void editEpic(Epic epic) {
         Epics.put(epic.getId(), epic);
     }
 
-    public void editSubtask(Subtask subtask){
+    public void editSubtask(Subtask subtask) {
         Epics.get(subtask.getEpicId()).addSubtask(subtask.getId(), subtask);
     }
     // 2.5 Обновление....
@@ -48,11 +48,11 @@ public class Manager {
 
     public void addNewSubtask(int epicId, String name, String description) {
 
-        if (Epics.get(epicId) == null){
+        if (Epics.get(epicId) == null) {
             System.out.println("Эпик %d не найден, невозможно добавить подзадачу в несуществующий эпик");
             return;
         }
-        Epics.get(epicId).addSubtask(taskCount, new Subtask(taskCount, epicId, name,description));
+        Epics.get(epicId).addSubtask(taskCount, new Subtask(taskCount, epicId, name, description));
         taskCount++;
     }
 
@@ -71,9 +71,9 @@ public class Manager {
         }
 
         for (int i : Epics.keySet()) {
-            for (Subtask subtask : Epics.get(i).getSubtaskList()){
-                if (subtask.getId() == id){
-                    Epics.get(i).setSubtaskStatus(id,status);
+            for (Subtask subtask : Epics.get(i).getSubtaskList()) {
+                if (subtask.getId() == id) {
+                    Epics.get(i).setSubtaskStatus(id, status);
                 }
             }
         }
@@ -104,16 +104,16 @@ public class Manager {
     public ArrayList<Subtask> getAllSubtasks() {
         ArrayList<Subtask> subtasks = new ArrayList<>();
 
-        for (Integer i : Epics.keySet()){
-            for(Subtask s : Epics.get(i).getSubtaskList()){
+        for (Integer i : Epics.keySet()) {
+            for (Subtask s : Epics.get(i).getSubtaskList()) {
                 subtasks.add(s);
             }
         }
         return subtasks;
     }
 
-    public void showAllEpics(){
-        for ( Integer i : Epics.keySet()){
+    public void showAllEpics() {
+        for (Integer i : Epics.keySet()) {
             Epics.get(i).showEpicInfo();
         }
     }
@@ -152,7 +152,7 @@ public class Manager {
         }
 
         for (Integer i : Epics.keySet()) {
-            for (Subtask subtask : Epics.get(i).getSubtaskList()){
+            for (Subtask subtask : Epics.get(i).getSubtaskList()) {
                 if (subtask.getId() == d) {
                     Epics.get(i).deleteSubtask(d);
                     return;
