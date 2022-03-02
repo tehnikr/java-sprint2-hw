@@ -5,20 +5,22 @@ public class Task {
     int id;
     protected String name;
     protected String description;
-    protected String status; // Закрыт от изменения извне
+    protected TaskStatus status;
 
-    public static final String tStatNew = "NEW";
-    public static final String tStatInPr = "IN_PROGRESS";
-    public static final String tStatDone = "DONE";
+    public enum TaskStatus {
+        NEW_TASK,
+        IN_PROGRESS_TASK,
+        DONE_TASK;
+    }
 
     public Task(int id, String name, String description) {
         this.id = id;
         this.name = name;
         this.description = description;
-        this.status = tStatNew;
+        this.status = TaskStatus.NEW_TASK;
     }
 
-    public Task(int id, String name, String description, String status) {
+    public Task(int id, String name, String description, TaskStatus status) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -43,11 +45,11 @@ public class Task {
                 '}';
     }
 
-    public String getStatus() {
+    public TaskStatus getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(TaskStatus status) {
         this.status = status;
     }
 

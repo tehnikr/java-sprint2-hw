@@ -6,46 +6,37 @@ import tasks.Task;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
-public class Manager {
+public class InMemoryTaskManager implements TaskManager {
 
-    private int taskCount = 0;
+
+    int taskCount = 0;
 
     private HashMap<Integer, Task> Tasks;
     private HashMap<Integer, Epic> Epics;
 
-    public Manager() {
+    private HistoryManager historyManager = new InMemoryHistoryManager();
+
+    public InMemoryTaskManager() {
         Tasks = new HashMap<>();
         Epics = new HashMap<>();
     }
 
 
+    @Override
     public void addNewTask(String name, String description) {
         Tasks.put(taskCount, new Task(taskCount, name, description));
         taskCount++;
     }
 
-
-    // 2.5 Обновление. Новая версия объекта с верным идентификатором передаются в виде параметра
-    // Это нужно?
-    public void editTask(Task task) {
-        Tasks.put(task.getId(), task);
-    }
-
-    public void editEpic(Epic epic) {
-        Epics.put(epic.getId(), epic);
-    }
-
-    public void editSubtask(Subtask subtask) {
-        Epics.get(subtask.getEpicId()).addSubtask(subtask.getId(), subtask);
-    }
-    // 2.5 Обновление....
-
+    @Override
     public void addNewEpic(String name, String description) {
         Epics.put(taskCount, new Epic(taskCount, name, description));
         taskCount++;
     }
 
+    @Override
     public void addNewSubtask(int epicId, String name, String description) {
 
         if (Epics.get(epicId) == null) {
@@ -56,7 +47,54 @@ public class Manager {
         taskCount++;
     }
 
-    public void setStatus(int id, String status) {
+    @Override
+    public Task getTask(int id) {
+        Task task = Tasks.get(id);
+        historyManager.add(task);
+        return task;
+    }
+
+    @Override
+    public Epic getEpic(int id) {
+        Epic epic = Epics.get(id);
+        historyManager.add(epic);
+        return epic;
+    }
+
+    @Override
+    public Subtask getSubtask(int id) {
+        Integer epicId;
+        Subtask subtask = null;
+        for (Integer i : Epics.keySet()) {
+            for (Subtask k : Epics.get(i).getSubtaskList()) {
+                if (k.getId() == id) {
+                    epicId = i;
+                    subtask = k;
+                }
+            }
+        }
+        historyManager.add(subtask);
+        return subtask;
+    }
+
+    @Override
+    public void editTask(Task task) {
+        Tasks.put(task.getId(), task);
+    }
+
+
+    @Override
+    public void editEpic(Epic epic) {
+        Epics.put(epic.getId(), epic);
+    }
+
+    @Override
+    public void editSubtask(Subtask subtask) {
+        Epics.get(subtask.getEpicId()).addSubtask(subtask.getId(), subtask);
+    }
+
+
+    public void setStatus(int id, Task.TaskStatus status) {
 
         for (Integer i : Tasks.keySet()) {
             if (i == id) {
@@ -164,5 +202,14 @@ public class Manager {
 
     public ArrayList<Subtask> getEpicSubtasks(int id) {
         return Epics.get(id).getSubtaskList();
+    }
+
+    public List<Task> history() {
+        return historyManager.getHistory();
+    }
+
+    @Override
+    public HistoryManager getDefaultHistoryManager() {
+        return historyManager;
     }
 }

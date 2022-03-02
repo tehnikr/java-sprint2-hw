@@ -1,78 +1,106 @@
-import mgr.Manager;
+import mgr.*;
 import tasks.Task;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
         System.out.println("Пришло время практики!");
 
-        Manager mgr = new Manager();
+        TaskManager tmgr = Managers.getDefault();
+        HistoryManager hmgr = Managers.getDefaultHistory();
 
-        mgr.addNewTask("Задача 1", "Описание задачи 1");
-        mgr.addNewTask("Задача 2", "Описание задачи 2");
+        tmgr.addNewTask("Задача 1", "Описание задачи 1");
+        tmgr.addNewTask("Задача 2", "Описание задачи 2");
 
-        mgr.addNewEpic("Эпик 1", "Описание эпика 1");
-        mgr.addNewEpic("Эпик 2", "Описание эпика 2");
+        tmgr.addNewEpic("Эпик 1", "Описание эпика 1");
+        tmgr.addNewEpic("Эпик 2", "Описание эпика 2");
 
-        mgr.addNewSubtask(2, "Имя подзадачи 1-1", "Описание подзадачи 1-1");
-        mgr.addNewSubtask(2, "Имя подзадачи 1-2", "Описание подзадачи 1-2");
-        mgr.addNewSubtask(3, "Имя подзадачи 2-1", "Описание подзадачи 2-1");
+        tmgr.addNewSubtask(2, "Имя подзадачи 1-1", "Описание подзадачи 1-1");
+        tmgr.addNewSubtask(2, "Имя подзадачи 1-2", "Описание подзадачи 1-2");
+        tmgr.addNewSubtask(3, "Имя подзадачи 2-1", "Описание подзадачи 2-1");
 
-        mgr.addNewEpic("Эпик 3", "Описание эпика 3");
-        mgr.addNewSubtask(7, "Имя подзадачи 3-1", "Описание подзадачи 3-1");
-        mgr.addNewSubtask(7, "Имя подзадачи 3-2", "Описание подзадачи 3-2");
-        mgr.addNewSubtask(7, "Имя подзадачи 3-3", "Описание подзадачи 3-3");
+        tmgr.addNewEpic("Эпик 3", "Описание эпика 3");
+        tmgr.addNewSubtask(7, "Имя подзадачи 3-1", "Описание подзадачи 3-1");
+        tmgr.addNewSubtask(7, "Имя подзадачи 3-2", "Описание подзадачи 3-2");
+        tmgr.addNewSubtask(7, "Имя подзадачи 3-3", "Описание подзадачи 3-3");
 
-        mgr.addNewEpic("Эпик 4", "Описание эпика 4");
-        mgr.addNewSubtask(11, "Имя подзадачи 4-1", "Описание подзадачи 4-1");
-        mgr.addNewSubtask(11, "Имя подзадачи 4-2", "Описание подзадачи 4-2");
-        mgr.addNewSubtask(11, "Имя подзадачи 4-3", "Описание подзадачи 4-3");
+        tmgr.addNewEpic("Эпик 4", "Описание эпика 4");
+        tmgr.addNewSubtask(11, "Имя подзадачи 4-1", "Описание подзадачи 4-1");
+        tmgr.addNewSubtask(11, "Имя подзадачи 4-2", "Описание подзадачи 4-2");
+        tmgr.addNewSubtask(11, "Имя подзадачи 4-3", "Описание подзадачи 4-3");
 
-        System.out.println(mgr.getAllTasks());
+        System.out.println(tmgr.getAllTasks());
 
 
         // Изменяем задачу 2
-        mgr.editTask(new Task(1, "Задача 2", "Измен Оп задачи 2", Task.tStatInPr));
+        tmgr.editTask(new Task(1, "Задача 2", "Измен Оп задачи 2", Task.TaskStatus.IN_PROGRESS_TASK));
 
-        System.out.println(mgr.getAllTasks());
+        System.out.println(tmgr.getAllTasks());
 
 
-        System.out.println(mgr.getEpicSubtasks(2));
-        System.out.println(mgr.getEpicSubtasks(3));
+        System.out.println(tmgr.getEpicSubtasks(2));
+        System.out.println(tmgr.getEpicSubtasks(3));
 
-        System.out.println(mgr.getAllEpics());
-        System.out.println(mgr.getAllSubtasks());
+        System.out.println(tmgr.getAllEpics());
+        System.out.println(tmgr.getAllSubtasks());
 
 
         System.out.println("Эпики:");
-        mgr.showAllEpics();
+        tmgr.showAllEpics();
 
         System.out.println("Меняем статусы:");
-        mgr.setStatus(1, Task.tStatDone);
+        tmgr.setStatus(1, Task.TaskStatus.DONE_TASK);
 
-        mgr.setStatus(5, Task.tStatInPr);
-        mgr.setStatus(6, Task.tStatDone);
+        tmgr.setStatus(5, Task.TaskStatus.IN_PROGRESS_TASK);
+        tmgr.setStatus(6, Task.TaskStatus.DONE_TASK);
 
-        mgr.setStatus(12, Task.tStatDone);
-        mgr.setStatus(13, Task.tStatInPr);
-        mgr.setStatus(14, Task.tStatDone);
+        tmgr.setStatus(12, Task.TaskStatus.DONE_TASK);
+        tmgr.setStatus(13, Task.TaskStatus.IN_PROGRESS_TASK);
+        tmgr.setStatus(14, Task.TaskStatus.DONE_TASK);
 
         System.out.println("Эпики после смены статуса:");
-        mgr.showAllEpics();
+        tmgr.showAllEpics();
         System.out.println("</>Эпики после смены статуса:");
 
-        System.out.println(mgr.getAllEpics());
-        System.out.println(mgr.getAllSubtasks());
+        System.out.println(tmgr.getAllEpics());
+        System.out.println(tmgr.getAllSubtasks());
+
+
+        System.out.println("<Проверка истории>");
+        tmgr.getTask(0);
+        tmgr.getEpic(2);
+        tmgr.getSubtask(4);
+        tmgr.getTask(1);
+        tmgr.getEpic(3);
+        tmgr.getSubtask(5);
+        tmgr.getTask(0);
+        tmgr.getEpic(7);
+        tmgr.getSubtask(6);
+        tmgr.getTask(1);
+        tmgr.getEpic(2);
+        tmgr.getSubtask(8);
+
+        //System.out.println(tmgr.history());
+        List<Task> l = tmgr.history();
+        System.out.println("  Размер истории: " + l.size());
+
+        for (Task t : l) {
+            System.out.println("    " + t);
+        }
+        System.out.println("</Проверка истории>");
 
         System.out.println("Удаляем 1-й:");
-        mgr.deleteTask(1);
+        tmgr.deleteTask(1);
         System.out.println("Удалён");
 
         System.out.println("Удаляем все:");
 
-        mgr.delAllTasks();
+        tmgr.delAllTasks();
 
-        System.out.println(mgr.getAllTasks());
-        System.out.println(mgr.getAllEpics());
-        System.out.println(mgr.getAllSubtasks());
+        System.out.println(tmgr.getAllTasks());
+        System.out.println(tmgr.getAllEpics());
+        System.out.println(tmgr.getAllSubtasks());
     }
 }

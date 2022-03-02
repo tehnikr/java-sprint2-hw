@@ -37,11 +37,11 @@ public class Epic extends Task {
     }
 
     @Override
-    public void setStatus(String status) {
+    public void setStatus(TaskStatus status) {
         // Переопределил метод чтобы он ничего не делал
     }
 
-    public void setSubtaskStatus(Integer id, String status) {
+    public void setSubtaskStatus(Integer id, TaskStatus status) {
         for (Integer i : subtasks.keySet()) {
             if (subtasks.get(i).getId() == id) {
                 subtasks.get(i).setStatus(status);
@@ -69,32 +69,32 @@ public class Epic extends Task {
     }
 
     private void examinationEpicStatus() {
-        String tmpStatus = Task.tStatDone;
+        TaskStatus tmpStatus = Task.TaskStatus.DONE_TASK;
 
         for (Integer ik : subtasks.keySet()) {
-            if (subtasks.get(ik).getStatus().equals(Task.tStatInPr)) {
-                tmpStatus = Task.tStatInPr;
+            if (subtasks.get(ik).getStatus().equals(Task.TaskStatus.DONE_TASK)) {
+                tmpStatus = TaskStatus.IN_PROGRESS_TASK;
             }
         }
 
         boolean isNew = true;
 
         for (Integer ik : subtasks.keySet()) {
-            if (!subtasks.get(ik).getStatus().equals(Task.tStatNew)) isNew = false;
+            if (!subtasks.get(ik).getStatus().equals(TaskStatus.NEW_TASK)) isNew = false;
         }
 
         if (isNew) {
-            tmpStatus = Task.tStatNew;
+            tmpStatus = TaskStatus.NEW_TASK;
         }
 
         boolean isDone = true;
         for (Integer ik : subtasks.keySet()) {
-            if (!subtasks.get(ik).getStatus().equals(Task.tStatDone)) isDone = false;
+            if (!subtasks.get(ik).getStatus().equals(TaskStatus.DONE_TASK)) isDone = false;
         }
-        if (isDone) tmpStatus = Task.tStatDone;
+        if (isDone) tmpStatus = TaskStatus.DONE_TASK;
 
 
-        if (subtasks.isEmpty()) tmpStatus = Task.tStatNew;
+        if (subtasks.isEmpty()) tmpStatus = TaskStatus.NEW_TASK;
 
         status = tmpStatus;
     }
