@@ -11,7 +11,7 @@ import java.util.List;
 public class InMemoryTaskManager implements TaskManager {
 
 
-    int taskCount = 0;
+    private int taskCount = 0;
 
     private HashMap<Integer, Task> Tasks;
     private HashMap<Integer, Epic> Epics;
