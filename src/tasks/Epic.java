@@ -30,9 +30,9 @@ public class Epic extends Task {
     public String toString() {
         return "tasks.Epic{" +
                 " id=" + id +
-                ", name='" + this.getName() + '\'' +
-                ", description='" + this.getDescription() + '\'' +
-                ", status='" + this.getStatus() + '\'' +
+                //", name='" + this.getName() + '\'' +
+                //", description='" + this.getDescription() + '\'' +
+                //", status='" + this.getStatus() + '\'' +
                 '}';
     }
 
@@ -58,9 +58,9 @@ public class Epic extends Task {
     public void showEpicInfo() {
         System.out.println("tasks.Epic{" +
                 " id=" + id +
-                ", name='" + this.getName() + '\'' +
-                ", description='" + this.getDescription() + '\'' +
-                ", status='" + this.getStatus() + '\'' +
+                //", name='" + this.getName() + '\'' +
+                //", description='" + this.getDescription() + '\'' +
+                //", status='" + this.getStatus() + '\'' +
                 '}');
 
         for (Integer i : subtasks.keySet()) {

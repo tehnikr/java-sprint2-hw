@@ -38,10 +38,10 @@ public class Task {
     @Override
     public String toString() {
         return "tasks.Task{" +
-                "name='" + name + '\'' +
-                ", description='" + description + '\'' +
+                //"name='" + name + '\'' +
+                //", description='" + description + '\'' +
                 ", id=" + id +
-                ", status='" + status + '\'' +
+                //", status='" + status + '\'' +
                 '}';
     }
 

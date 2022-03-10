@@ -24,9 +24,9 @@ public class Subtask extends Task {
         return "tasks.Subtask{" +
                 "epicId=" + epicId +
                 ", id=" + id +
-                ", name='" + this.getName() + '\'' +
-                ", description='" + this.getDescription() + '\'' +
-                ", status='" + this.getStatus() + '\'' +
+                //", name='" + this.getName() + '\'' +
+                //", description='" + this.getDescription() + '\'' +
+                //", status='" + this.getStatus() + '\'' +
                 '}';
     }
 }
