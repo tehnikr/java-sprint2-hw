@@ -46,4 +46,6 @@ public interface TaskManager {
     List<Task> history();
 
     HistoryManager getDefaultHistoryManager();
+
+    void showAllTasks();
 }

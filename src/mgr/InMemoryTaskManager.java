@@ -56,9 +56,12 @@ public class InMemoryTaskManager implements TaskManager {
 
     @Override
     public Epic getEpic(int id) {
-        Epic epic = Epics.get(id);
-        historyManager.add(epic);
-        return epic;
+        if (Epics.containsKey(id)) {
+            Epic epic = Epics.get(id);
+            historyManager.add(epic);
+            return epic;
+        }
+        return null;
     }
 
     @Override
@@ -73,7 +76,10 @@ public class InMemoryTaskManager implements TaskManager {
                 }
             }
         }
-        historyManager.add(subtask);
+        if (subtask != null) {
+            historyManager.add(subtask);
+        }
+
         return subtask;
     }
 
@@ -178,13 +184,18 @@ public class InMemoryTaskManager implements TaskManager {
         for (Integer i : Tasks.keySet()) {
             if (i == d) {
                 Tasks.remove(d);
+                historyManager.remove(d);
                 return;
             }
         }
 
         for (Integer i : Epics.keySet()) {
             if (i == d) {
+                for (Subtask subtask : Epics.get(i).getSubtaskList()) {
+                    historyManager.remove(subtask.getId());
+                }
                 Epics.remove(d);
+                historyManager.remove(d);
                 return;
             }
         }
@@ -193,6 +204,7 @@ public class InMemoryTaskManager implements TaskManager {
             for (Subtask subtask : Epics.get(i).getSubtaskList()) {
                 if (subtask.getId() == d) {
                     Epics.get(i).deleteSubtask(d);
+                    historyManager.remove(d);
                     return;
                 }
             }
@@ -211,5 +223,31 @@ public class InMemoryTaskManager implements TaskManager {
     @Override
     public HistoryManager getDefaultHistoryManager() {
         return historyManager;
+    }
+
+    @Override
+    public void showAllTasks() {
+        System.out.println("<All tasks>");
+        System.out.println("\t<Tasks>");
+        for (Integer t : Tasks.keySet()) {
+            System.out.println("\t\t" + Tasks.get(t));
+        }
+        System.out.println("\t</Tasks>");
+
+        System.out.println("\n\t<Epics>");
+        for (Integer t : Epics.keySet()) {
+            Epic ep = Epics.get(t);
+            System.out.println("\t\t" + ep);
+
+            for (Subtask st : ep.getSubtaskList()) {
+                System.out.println("\t\t\t" + st);
+            }
+
+        }
+        System.out.println("\t</Epics>");
+
+        System.out.println("</All tasks>");
+
+
     }
 }

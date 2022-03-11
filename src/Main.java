@@ -30,7 +30,18 @@ public class Main {
         tmgr.getSubtask(4);
         System.out.println("История: " + hmgr.getHistory());
 
+        tmgr.getSubtask(4);
+        System.out.println("История: " + hmgr.getHistory());
+
+        tmgr.showAllTasks();
+
+        tmgr.deleteTask(2);
+        System.out.println("История: " + hmgr.getHistory());
+
         tmgr.getEpic(3);
+        System.out.println("История: " + hmgr.getHistory());
+
+        tmgr.getEpic(2);
         System.out.println("История: " + hmgr.getHistory());
 
         tmgr.getEpic(2);

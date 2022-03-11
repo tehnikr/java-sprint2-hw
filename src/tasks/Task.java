@@ -41,7 +41,7 @@ public class Task {
                 //"name='" + name + '\'' +
                 //", description='" + description + '\'' +
                 ", id=" + id +
-                //", status='" + status + '\'' +
+                ", status='" + status + '\'' +
                 '}';
     }
 

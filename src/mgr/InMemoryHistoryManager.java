@@ -33,8 +33,107 @@ public class InMemoryHistoryManager implements HistoryManager {
 
     @Override
     public void add(Task task) {
+        Node<Task> newTask = new Node<Task>(task, null);
+        removeNode(newTask);
+        linkLast(newTask);
+    }
 
-        Node<Task> newNode = new Node<>(task, null);
+    @Override
+    public void remove(int removeId) {
+        if (removeId < 0) {
+            return;
+        }
+        if (historyLL.containsKey(removeId)) {
+
+            if ((historyLL.get(removeId)).value.getClass().equals((new Epic(1, "aes", "aswef")).getClass())) {
+
+                Epic g = (Epic) historyLL.get(removeId).value;
+                System.out.println("Эпик: " + removeId);
+
+                for (Subtask s : g.getSubtaskList()) {
+
+                    if (historyLL.containsKey(s.getId())) {
+
+
+                        //historyLL.remove(s.getId());
+                        removeNode(historyLL.get(s.getId()));
+
+                        System.out.println("Субтаск: " + s.getName() + " удалён");
+                    }
+                }
+            }
+            removeNode(historyLL.get(removeId));
+        }
+
+
+    }
+
+    @Override
+    public List<Task> getHistory() {
+        return getTasks();
+    }
+
+    private void linkLast(Node<Task> newNode) {
+        if (size == 0) {
+            first = newNode.value.getId();
+            last = newNode.value.getId();
+            size++;
+            historyLL.put(newNode.value.getId(), newNode);
+        } else {
+            historyLL.get(last).next = newNode.value.getId();
+            newNode.previous = last;
+            last = newNode.value.getId();
+            historyLL.put(newNode.value.getId(), newNode);
+            size++;
+        }
+    }
+
+    private List<Task> getTasks() {
+        ArrayList<Task> historyListToRet = new ArrayList<>();
+
+        Node<Task> temp = historyLL.get(first);
+
+
+        while (temp.next != null) {
+            historyListToRet.add(temp.value);
+            temp = historyLL.get(temp.next);
+        }
+
+        historyListToRet.add(temp.value);
+        return historyListToRet;
+    }
+
+    private void removeNode(Node<Task> nodeToRemove) {
+        if (nodeToRemove.value == null) return;
+        int removeId = nodeToRemove.value.getId();
+        if (historyLL.containsKey(removeId)) {
+
+            if (removeId != last && removeId != first) {
+                historyLL.get(historyLL.get(removeId).next).previous = historyLL.get(removeId).previous;
+                historyLL.get(historyLL.get(removeId).previous).next = historyLL.get(removeId).next;
+            }
+
+            if (removeId == first) {
+                first = historyLL.get(removeId).next;
+                historyLL.get(historyLL.get(removeId).next).previous = null;
+            }
+
+            if (removeId == last) {
+                last = historyLL.get(last).previous;
+                historyLL.get(historyLL.get(removeId).previous).next = null;
+            }
+
+
+            historyLL.remove(removeId);
+            size--;
+            return;
+        }
+
+    }
+}
+
+/*
+* Node<Task> newNode = new Node<>(task, null);
 
         if (size == 0) {
             size++;
@@ -64,84 +163,4 @@ public class InMemoryHistoryManager implements HistoryManager {
         } else {
             linkLast(newNode);
         }
-
-    }
-
-    @Override
-    public void remove(int removeId) {
-        if (removeId < 0) {
-            return;
-        }
-
-        if ((historyLL.get(removeId)).value.getClass().equals((new Epic(1, "aes", "aswef")).getClass())) {
-
-            Epic g = (Epic) historyLL.get(removeId).value;
-            System.out.println("Эпик: " + removeId);
-
-            for (Subtask s : g.getSubtaskList()) {
-
-                if (historyLL.containsKey(s.getId())) {
-
-
-                    //historyLL.remove(s.getId());
-                    removeNode(historyLL.get(s.getId()));
-
-                    System.out.println("Субтаск: " + s.getName() + " удалён");
-                }
-            }
-        }
-
-        removeNode(historyLL.get(removeId));
-    }
-
-    @Override
-    public List<Task> getHistory() {
-        return getTasks();
-    }
-
-    private void linkLast(Node<Task> newNode) {
-        historyLL.get(last).next = newNode.value.getId();
-        newNode.previous = last;
-        last = newNode.value.getId();
-        historyLL.put(newNode.value.getId(), newNode);
-        size++;
-    }
-
-    private List<Task> getTasks() {
-        ArrayList<Task> historyListToRet = new ArrayList<>();
-
-        Node<Task> temp = historyLL.get(first);
-
-
-        while (temp.next != null) {
-            historyListToRet.add(temp.value);
-            temp = historyLL.get(temp.next);
-        }
-
-        historyListToRet.add(temp.value);
-        return historyListToRet;
-    }
-
-    private void removeNode(Node<Task> r) {
-        int removeId = r.value.getId();
-        if (historyLL.containsKey(removeId)) {
-            if (historyLL.get(removeId).previous == null) {
-                first = historyLL.get(removeId).next;
-            } else {
-
-                Integer g = historyLL.get(removeId).next;
-                historyLL.get(historyLL.get(removeId).previous).next = g;
-            }
-
-            if (last == removeId) {
-                last = historyLL.get(last).previous;
-                historyLL.get(last).previous = null;
-            } else {
-                historyLL.get(historyLL.get(removeId).next).previous = historyLL.get(removeId).previous;
-            }
-            historyLL.remove(removeId);
-            size--;
-            return;
-        }
-    }
-}
+* */
