@@ -33,7 +33,7 @@ public class InMemoryHistoryManager implements HistoryManager {
 
     @Override
     public void add(Task task) {
-        Node<Task> newTask = new Node<Task>(task, null);
+        Node<Task> newTask = new Node<>(task, null);
         removeNode(newTask);
         linkLast(newTask);
     }
@@ -53,19 +53,13 @@ public class InMemoryHistoryManager implements HistoryManager {
                 for (Subtask s : g.getSubtaskList()) {
 
                     if (historyLL.containsKey(s.getId())) {
-
-
-                        //historyLL.remove(s.getId());
                         removeNode(historyLL.get(s.getId()));
-
                         System.out.println("Субтаск: " + s.getName() + " удалён");
                     }
                 }
             }
             removeNode(historyLL.get(removeId));
         }
-
-
     }
 
     @Override
@@ -123,44 +117,8 @@ public class InMemoryHistoryManager implements HistoryManager {
                 historyLL.get(historyLL.get(removeId).previous).next = null;
             }
 
-
             historyLL.remove(removeId);
             size--;
-            return;
         }
-
     }
 }
-
-/*
-* Node<Task> newNode = new Node<>(task, null);
-
-        if (size == 0) {
-            size++;
-            first = task.getId();
-            last = task.getId();
-            newNode.previous = null;
-            historyLL.put(task.getId(), newNode);
-            return;
-        }
-
-        if (historyLL.containsKey(task.getId())) {
-            Integer removeId = task.getId();
-            if (historyLL.get(removeId).previous == null) {
-                first = historyLL.get(removeId).next;
-            } else {
-                historyLL.get(historyLL.get(removeId).previous).next = historyLL.get(removeId).next;
-            }
-            historyLL.get(historyLL.get(removeId).next).previous = historyLL.get(removeId).previous;
-            historyLL.remove(removeId);
-            newNode.next = null;
-            newNode.previous = last;
-            historyLL.get(last).next = newNode.value.getId();
-            last = newNode.value.getId();
-            historyLL.put(newNode.value.getId(), newNode);
-            size++;
-            return;
-        } else {
-            linkLast(newNode);
-        }
-* */
