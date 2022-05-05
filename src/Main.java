@@ -1,9 +1,6 @@
 import mgr.*;
 import tasks.Task;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Main {
     public static void main(String[] args) {
         System.out.println("Пришло время практики!");
@@ -21,21 +18,19 @@ public class Main {
         tmgr.addNewSubtask(2, "Имя подзадачи 1-2", "Описание подзадачи 1-2");
         tmgr.addNewSubtask(2, "Имя подзадачи 2-3", "Описание подзадачи 1-3");
 
-        tmgr.getTask(0);
+        tmgr.getTask(1);
         System.out.println("История: " + hmgr.getHistory());
 
-        tmgr.getEpic(2);
-        System.out.println("История: " + hmgr.getHistory());
 
-        tmgr.getSubtask(4);
-        System.out.println("История: " + hmgr.getHistory());
+        tmgr.getSubtask(4).setStatus(Task.TaskStatus.IN_PROGRESS_TASK);
 
         tmgr.getSubtask(4);
+        tmgr.getEpic(3);/*
         System.out.println("История: " + hmgr.getHistory());
 
         tmgr.showAllTasks();
 
-        tmgr.deleteTask(2);
+        //tmgr.deleteTask(2);
         System.out.println("История: " + hmgr.getHistory());
 
         tmgr.getEpic(3);
@@ -45,12 +40,16 @@ public class Main {
         System.out.println("История: " + hmgr.getHistory());
 
         tmgr.getEpic(2);
+        System.out.println("История: " + hmgr.getHistory());*/
+
+        tmgr.getSubtask(5);/*
         System.out.println("История: " + hmgr.getHistory());
 
-        tmgr.getSubtask(5);
+        hmgr.remove(3);*/
         System.out.println("История: " + hmgr.getHistory());
 
-        hmgr.remove(3);
+        FileBackedTasksManager.main(new String[]{"asdf", "hgtr"});
+
         System.out.println("История: " + hmgr.getHistory());
 
     }

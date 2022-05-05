@@ -26,14 +26,14 @@ public class Epic extends Task {
         examinationEpicStatus();
     }
 
+    public Subtask getSubtask(Integer id) {
+        return subtasks.get(id);
+    }
+
+
     @Override
     public String toString() {
-        return "tasks.Epic{" +
-                " id=" + id +
-                //", name='" + this.getName() + '\'' +
-                //", description='" + this.getDescription() + '\'' +
-                //", status='" + this.getStatus() + '\'' +
-                '}';
+        return this.getId() + "," + TaskType.EPIC + "," + this.getName() + "," + this.getStatus() + "," + this.getDescription();
     }
 
     @Override
@@ -68,11 +68,11 @@ public class Epic extends Task {
         }
     }
 
-    private void examinationEpicStatus() {
+    public void examinationEpicStatus() {
         TaskStatus tmpStatus = Task.TaskStatus.DONE_TASK;
 
         for (Integer ik : subtasks.keySet()) {
-            if (subtasks.get(ik).getStatus().equals(Task.TaskStatus.DONE_TASK)) {
+            if (subtasks.get(ik).getStatus().equals(Task.TaskStatus.IN_PROGRESS_TASK)) {
                 tmpStatus = TaskStatus.IN_PROGRESS_TASK;
             }
         }

@@ -11,12 +11,12 @@ import java.util.List;
 public class InMemoryTaskManager implements TaskManager {
 
 
-    private int taskCount = 0;
+    protected int taskCount = 0;
 
-    private HashMap<Integer, Task> Tasks;
-    private HashMap<Integer, Epic> Epics;
+    protected HashMap<Integer, Task> Tasks;
+    protected HashMap<Integer, Epic> Epics;
 
-    private HistoryManager historyManager = new InMemoryHistoryManager();
+    protected HistoryManager historyManager = new InMemoryHistoryManager();
 
     public InMemoryTaskManager() {
         Tasks = new HashMap<>();
@@ -225,6 +225,7 @@ public class InMemoryTaskManager implements TaskManager {
         return historyManager;
     }
 
+
     @Override
     public void showAllTasks() {
         System.out.println("<All tasks>");
@@ -247,7 +248,9 @@ public class InMemoryTaskManager implements TaskManager {
         System.out.println("\t</Epics>");
 
         System.out.println("</All tasks>");
+    }
 
-
+    HistoryManager getHistoryManager() {
+        return historyManager;
     }
 }

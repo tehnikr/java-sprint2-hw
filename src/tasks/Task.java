@@ -13,6 +13,12 @@ public class Task {
         DONE_TASK;
     }
 
+    public enum TaskType {
+        TASK,
+        EPIC,
+        SUBTASK;
+    }
+
     public Task(int id, String name, String description) {
         this.id = id;
         this.name = name;
@@ -35,14 +41,8 @@ public class Task {
         return description;
     }
 
-    @Override
     public String toString() {
-        return "tasks.Task{" +
-                //"name='" + name + '\'' +
-                //", description='" + description + '\'' +
-                ", id=" + id +
-                ", status='" + status + '\'' +
-                '}';
+        return this.getId() + "," + TaskType.TASK + "," + this.getName() + "," + this.getStatus() + "," + this.getDescription();
     }
 
     public TaskStatus getStatus() {

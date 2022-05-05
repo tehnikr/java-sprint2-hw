@@ -25,10 +25,6 @@ public class InMemoryHistoryManager implements HistoryManager {
             this.value = value;
             this.next = null;
         }
-
-        public E getValue() {
-            return value;
-        }
     }
 
     @Override
@@ -85,21 +81,26 @@ public class InMemoryHistoryManager implements HistoryManager {
     private List<Task> getTasks() {
         ArrayList<Task> historyListToRet = new ArrayList<>();
 
-        Node<Task> temp = historyLL.get(first);
+        if (historyLL.size() != 0) {
 
 
-        while (temp.next != null) {
+            Node<Task> temp = historyLL.get(first);
+
+
+            while (temp.next != null) {
+                historyListToRet.add(temp.value);
+                temp = historyLL.get(temp.next);
+            }
+
             historyListToRet.add(temp.value);
-            temp = historyLL.get(temp.next);
         }
-
-        historyListToRet.add(temp.value);
         return historyListToRet;
     }
 
     private void removeNode(Node<Task> nodeToRemove) {
         if (nodeToRemove.value == null) return;
         int removeId = nodeToRemove.value.getId();
+
         if (historyLL.containsKey(removeId)) {
 
             if (removeId != last && removeId != first) {
@@ -120,5 +121,19 @@ public class InMemoryHistoryManager implements HistoryManager {
             historyLL.remove(removeId);
             size--;
         }
+
+    }
+
+    public String toString() {
+        List<Task> tempList = getHistory();
+        String result = "";
+
+        if (tempList.size() > 0) {
+            for (int k = 0; k + 1 < tempList.size(); k++) {
+                result = result + tempList.get(k).getId() + ",";
+            }
+            result = result + tempList.get(tempList.size() - 1).getId();
+        }
+        return result;
     }
 }
