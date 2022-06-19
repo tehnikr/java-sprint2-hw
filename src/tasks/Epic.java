@@ -75,6 +75,9 @@ public class Epic extends Task {
             if (subtasks.get(ik).getStatus().equals(Task.TaskStatus.IN_PROGRESS_TASK)) {
                 tmpStatus = TaskStatus.IN_PROGRESS_TASK;
             }
+
+
+
         }
 
         boolean isNew = true;
@@ -95,6 +98,16 @@ public class Epic extends Task {
 
 
         if (subtasks.isEmpty()) tmpStatus = TaskStatus.NEW_TASK;
+
+        isNew = false;
+        isDone = false;
+
+        for (Integer ik : subtasks.keySet()) {
+            if (subtasks.get(ik).getStatus().equals(TaskStatus.DONE_TASK)) isDone = true;
+            if (subtasks.get(ik).getStatus().equals(TaskStatus.NEW_TASK)) isNew = true;
+        }
+
+        if (isDone && isNew) tmpStatus = TaskStatus.IN_PROGRESS_TASK;
 
         status = tmpStatus;
     }
