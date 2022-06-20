@@ -7,16 +7,14 @@ import java.util.List;
 
 public interface HistoryManager {
 
-    static String toString(HistoryManager manager) {
-        return manager.toString();
-    }
-
     static List<Integer> fromString(String value) {
         ArrayList hist = new ArrayList();
         String t[] = value.split(",");
 
-        for (int i = 0; i < t.length; i++) {
-            hist.add(Integer.parseInt(t[i]));
+        if (t.length != 1) {
+            for (int i = 0; i < t.length; i++) {
+                hist.add(Integer.parseInt(t[i]));
+            }
         }
         return hist;
     }
@@ -26,4 +24,8 @@ public interface HistoryManager {
     void remove(int id);
 
     List<Task> getHistory();
+
+    static String toString(HistoryManager manager) {
+        return manager.toString();
+    }
 }

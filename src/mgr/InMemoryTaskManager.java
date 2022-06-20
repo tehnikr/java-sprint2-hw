@@ -31,9 +31,23 @@ public class InMemoryTaskManager implements TaskManager {
     }
 
     @Override
+    public int addNewTask(Task task) {
+        Tasks.put(taskCount, task);
+        taskCount++;
+        return taskCount - 1;
+    }
+
+    @Override
     public void addNewEpic(String name, String description) {
         Epics.put(taskCount, new Epic(taskCount, name, description));
         taskCount++;
+    }
+
+    @Override
+    public int addNewEpic(Epic epic) {
+        Epics.put(taskCount, epic);
+        taskCount++;
+        return taskCount - 1;
     }
 
     @Override

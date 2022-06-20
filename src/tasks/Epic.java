@@ -1,5 +1,6 @@
 package tasks;
 
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -9,6 +10,11 @@ public class Epic extends Task {
 
     public Epic(int id, String name, String description) {
         super(id, name, description);
+        subtasks = new HashMap<>();
+    }
+
+    public Epic(String name, String description) {
+        super(name, description, TaskStatus.NEW_TASK);
         subtasks = new HashMap<>();
     }
 
@@ -77,7 +83,6 @@ public class Epic extends Task {
             }
 
 
-
         }
 
         boolean isNew = true;
@@ -110,5 +115,16 @@ public class Epic extends Task {
         if (isDone && isNew) tmpStatus = TaskStatus.IN_PROGRESS_TASK;
 
         status = tmpStatus;
+    }
+
+    public LocalTime getEndTime(){
+
+        LocalTime timeExecuteAllSubtasks = startTime;
+
+        for (int i : subtasks.keySet()) {
+            timeExecuteAllSubtasks = timeExecuteAllSubtasks.plus(subtasks.get(i).getDuration());
+        }
+
+        return timeExecuteAllSubtasks;
     }
 }

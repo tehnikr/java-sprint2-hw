@@ -1,11 +1,19 @@
 package tasks;
 
+import java.time.Duration;
+import java.time.LocalTime;
+
 public class Task {
 
     int id;
     protected String name;
     protected String description;
     protected TaskStatus status;
+
+    LocalTime startTime;
+    protected Duration duration;
+
+
 
     public enum TaskStatus {
         NEW_TASK,
@@ -28,6 +36,12 @@ public class Task {
 
     public Task(int id, String name, String description, TaskStatus status) {
         this.id = id;
+        this.name = name;
+        this.description = description;
+        this.status = status;
+    }
+
+    public Task(String name, String description, TaskStatus status) {
         this.name = name;
         this.description = description;
         this.status = status;
@@ -56,4 +70,14 @@ public class Task {
     public Integer getId() {
         return id;
     }
+
+    public LocalTime getEndTime(){
+        return startTime.plus(duration);
+    }
+
+    public Duration getDuration (){
+        return duration;
+    }
+
+
 }

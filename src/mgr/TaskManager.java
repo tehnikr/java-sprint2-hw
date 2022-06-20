@@ -11,7 +11,11 @@ public interface TaskManager {
 
     void addNewTask(String s, String s1);
 
+    int addNewTask(Task task);
+
     void addNewEpic(String s, String s1);
+
+    int addNewEpic(Epic epic);
 
     void addNewSubtask(int i, String s, String s1);
 

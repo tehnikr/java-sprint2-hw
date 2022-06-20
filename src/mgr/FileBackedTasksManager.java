@@ -67,7 +67,8 @@ public class FileBackedTasksManager extends InMemoryTaskManager {
                 System.out.println("Восстанавливаем HistoryManager");
 
                 ArrayList hist = null;
-                hist = (ArrayList) HistoryManager.fromString(fileReader.readLine());
+                String temp = fileReader.readLine();
+                hist = (ArrayList) HistoryManager.fromString(temp);
 
 
                 System.out.println("hist: " + hist);

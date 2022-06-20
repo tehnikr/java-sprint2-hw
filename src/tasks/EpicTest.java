@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class EpicTest {
-    Epic et = new Epic(1,"testEpic", "testEpic");
+    Epic et = new Epic(1, "testEpic", "testEpic");
 
     @Test
     void createEpicTest() {

@@ -103,17 +103,22 @@ public class InMemoryHistoryManager implements HistoryManager {
 
         if (historyLL.containsKey(removeId)) {
 
-            if (removeId != last && removeId != first) {
+            if (historyLL.size() == 1) {
+                first = null;
+                last = null;
+            }
+
+            if (last != null && removeId != last && removeId != first) {
                 historyLL.get(historyLL.get(removeId).next).previous = historyLL.get(removeId).previous;
                 historyLL.get(historyLL.get(removeId).previous).next = historyLL.get(removeId).next;
             }
 
-            if (removeId == first) {
+            if (first != null && removeId == first) {
                 first = historyLL.get(removeId).next;
                 historyLL.get(historyLL.get(removeId).next).previous = null;
             }
 
-            if (removeId == last) {
+            if (last != null && removeId == last) {
                 last = historyLL.get(last).previous;
                 historyLL.get(historyLL.get(removeId).previous).next = null;
             }
@@ -121,7 +126,6 @@ public class InMemoryHistoryManager implements HistoryManager {
             historyLL.remove(removeId);
             size--;
         }
-
     }
 
     public String toString() {
