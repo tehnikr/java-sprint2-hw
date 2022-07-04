@@ -1,7 +1,7 @@
 package tasks;
 
-import java.time.Duration;
-import java.time.LocalTime;
+//import java.time.Duration;
+//import java.time.LocalTime;
 
 public class Task {
 
@@ -10,8 +10,8 @@ public class Task {
     protected String description;
     protected TaskStatus status;
 
-    LocalTime startTime;
-    protected Duration duration;
+    //LocalTime startTime;
+    //protected Duration duration;
 
 
 
@@ -50,9 +50,15 @@ public class Task {
     public String getName() {
         return name;
     }
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public String getDescription() {
         return description;
+    }
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String toString() {
@@ -71,13 +77,13 @@ public class Task {
         return id;
     }
 
-    public LocalTime getEndTime(){
+    /*public LocalTime getEndTime(){
         return startTime.plus(duration);
     }
 
     public Duration getDuration (){
         return duration;
-    }
+    }*/
 
 
 }

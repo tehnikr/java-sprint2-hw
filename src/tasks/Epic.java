@@ -117,7 +117,7 @@ public class Epic extends Task {
         status = tmpStatus;
     }
 
-    public LocalTime getEndTime(){
+    /*public LocalTime getEndTime(){
 
         LocalTime timeExecuteAllSubtasks = startTime;
 
@@ -126,5 +126,5 @@ public class Epic extends Task {
         }
 
         return timeExecuteAllSubtasks;
-    }
+    }*/
 }

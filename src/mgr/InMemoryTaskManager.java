@@ -23,6 +23,10 @@ public class InMemoryTaskManager implements TaskManager {
         Epics = new HashMap<>();
     }
 
+    public void setHistoryManager(HistoryManager mgr) {
+        this.historyManager = mgr;
+    }
+
 
     @Override
     public void addNewTask(String name, String description) {

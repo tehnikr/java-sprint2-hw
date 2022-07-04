@@ -64,14 +64,14 @@ public class FileBackedTasksManager extends InMemoryTaskManager {
                     }
                 }
 
-                System.out.println("Восстанавливаем HistoryManager");
+                //System.out.println("Восстанавливаем HistoryManager");
 
                 ArrayList hist = null;
                 String temp = fileReader.readLine();
                 hist = (ArrayList) HistoryManager.fromString(temp);
 
 
-                System.out.println("hist: " + hist);
+                //System.out.println("hist: " + hist);
 
                 for (int i = 0; i < hist.size(); i++) {
                     if (Tasks.containsKey(hist.get(i))) {
@@ -82,14 +82,14 @@ public class FileBackedTasksManager extends InMemoryTaskManager {
                         for (Integer e : Epics.keySet()) {
                             for (Subtask s : Epics.get(e).getSubtaskList()) {
                                 if (s.getId() == hist.get(i)) {
-                                    System.out.println("Найденный субтаск: " + s);
+                                    //System.out.println("Найденный субтаск: " + s);
                                     historyManager.add(s);
                                 }
                             }
                         }
                     }
                 }
-                System.out.println("/Восстанавливаем HistoryManager");
+                //System.out.println("/Восстанавливаем HistoryManager");
             } else {
                 System.out.println("Файл пустой!");
             }
@@ -233,12 +233,12 @@ public class FileBackedTasksManager extends InMemoryTaskManager {
                 return null;
         }
     }
-
+/*
     public static void main(String[] args) {
         System.out.println("FileBackedTasksManager.main  start");
         TaskManager tmgrn = Managers.getDefault();
 
         System.out.println("tmgrn.history: " + tmgrn.history());
         System.out.println("FileBackedTasksManager.main  end");
-    }
+    }*/
 }

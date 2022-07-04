@@ -44,7 +44,7 @@ public class InMemoryHistoryManager implements HistoryManager {
             if ((historyLL.get(removeId)).value.getClass().equals((new Epic(1, "aes", "aswef")).getClass())) {
 
                 Epic g = (Epic) historyLL.get(removeId).value;
-                System.out.println("Эпик: " + removeId);
+                //System.out.println("Удаляем эпик: " + removeId);
 
                 for (Subtask s : g.getSubtaskList()) {
 

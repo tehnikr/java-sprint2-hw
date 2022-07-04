@@ -1,12 +1,26 @@
+import com.google.gson.Gson;
 import mgr.*;
 import tasks.Task;
 
+import java.io.IOException;
+
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         System.out.println("Пришло время практики!");
+
+        //Managers mgr = new ("tasks.csv");
 
         TaskManager tmgr = Managers.getDefault();
         HistoryManager hmgr = Managers.getDefaultHistory();
+        HttpTaskServer httpTaskSrv = new HttpTaskServer(tmgr);
+
+        httpTaskSrv.start();
+
+        /* String JsonTmgr = new Gson().toJson(tmgr);
+        System.out.println("JsonTmgr: " + JsonTmgr);
+
+
+
 
         tmgr.addNewTask("Задача 1", "Описание задачи 1");
         tmgr.addNewTask("Задача 2", "Описание задачи 2");
@@ -40,15 +54,15 @@ public class Main {
         System.out.println("История: " + hmgr.getHistory());
 
         tmgr.getEpic(2);
-        System.out.println("История: " + hmgr.getHistory());*/
-
-        tmgr.getSubtask(5);/*
         System.out.println("История: " + hmgr.getHistory());
 
-        hmgr.remove(3);*/
+        tmgr.getSubtask(5);
         System.out.println("История: " + hmgr.getHistory());
 
-        FileBackedTasksManager.main(new String[]{"asdf", "hgtr"});
+        hmgr.remove(3);
+        System.out.println("История: " + hmgr.getHistory());
+
+        FileBackedTasksManager.main(new String[]{"asdf", "hgtr"});*/
 
         System.out.println("История: " + hmgr.getHistory());
 
