@@ -16,9 +16,8 @@ class FileBackedTasksManagerTest extends TaskManagerTest {
         File taskFile = new File("task1.csv");
         taskFile.delete();
         taskFile.createNewFile();
-        t = new FileBackedTasksManager(taskFile);
+        t = new FileBackedTasksManager("task1.csv");
     }
-
 
     @Test
     void addNewTaskTest() {
@@ -58,9 +57,9 @@ class FileBackedTasksManagerTest extends TaskManagerTest {
         taskFile.delete();
 
         taskFile.createNewFile();
-        FileBackedTasksManager ftm = new FileBackedTasksManager(taskFile);
+        FileBackedTasksManager ftm = new FileBackedTasksManager("task1.csv");
 
-        FileBackedTasksManager ftma = new FileBackedTasksManager(taskFile);
+        FileBackedTasksManager ftma = new FileBackedTasksManager("task1.csv");
 
         Assertions.assertEquals(0, ftma.getAllEpics().size(), "Ошибка размера восстановленного FileBackedTasksManager с одним epic");
 
@@ -73,14 +72,14 @@ class FileBackedTasksManagerTest extends TaskManagerTest {
         taskFile.delete();
 
         taskFile.createNewFile();
-        FileBackedTasksManager ftm = new FileBackedTasksManager(taskFile);
+        FileBackedTasksManager ftm = new FileBackedTasksManager("task1.csv");
 
         //ftm.getEpic(1);
 
 
         ftm.addNewEpic("Epic1", "DescrEpic1");
         ftm.addNewEpic("Epic2", "DescrEpic2");
-        FileBackedTasksManager ftma = new FileBackedTasksManager(taskFile);
+        FileBackedTasksManager ftma = new FileBackedTasksManager("task1.csv");
 
         Assertions.assertEquals(2, ftma.getAllEpics().size(), "Ошибка размера восстановленного FileBackedTasksManager с одним epic");
 
@@ -93,13 +92,13 @@ class FileBackedTasksManagerTest extends TaskManagerTest {
         taskFile.delete();
 
         taskFile.createNewFile();
-        FileBackedTasksManager ftm = new FileBackedTasksManager(taskFile);
+        FileBackedTasksManager ftm = new FileBackedTasksManager("task1.csv");
 
 
         ftm.addNewEpic("Epic1", "DescrEpic1");
         ftm.addNewEpic("Epic2", "DescrEpic2");
         ftm.getEpic(1); // Создаем запись в истории
-        FileBackedTasksManager ftma = new FileBackedTasksManager(taskFile);
+        FileBackedTasksManager ftma = new FileBackedTasksManager("task1.csv");
 
         Assertions.assertEquals(2, ftma.getAllEpics().size(), "Ошибка размера восстановленного FileBackedTasksManager с одним epic");
 
@@ -112,7 +111,7 @@ class FileBackedTasksManagerTest extends TaskManagerTest {
         taskFile.delete();
 
         taskFile.createNewFile();
-        FileBackedTasksManager ftm = new FileBackedTasksManager(taskFile);
+        FileBackedTasksManager ftm = new FileBackedTasksManager("task1.csv");
 
 
         ftm.addNewEpic("Epic1", "DescrEpic1");
@@ -120,7 +119,7 @@ class FileBackedTasksManagerTest extends TaskManagerTest {
 
         // Записи в истории нет - история пустая
 
-        FileBackedTasksManager ftma = new FileBackedTasksManager(taskFile);
+        FileBackedTasksManager ftma = new FileBackedTasksManager("task1.csv");
 
         Assertions.assertEquals(2, ftma.getAllEpics().size(), "Ошибка размера восстановленного FileBackedTasksManager с одним epic");
     }

@@ -20,10 +20,10 @@ public class FileBackedTasksManager extends InMemoryTaskManager {
         super();
     }
 
-    FileBackedTasksManager(File file) {
+    FileBackedTasksManager(String filename) {
         this();
 
-        this.filename = file.getPath();
+        this.filename = filename;
 
         try (BufferedReader fileReader = new BufferedReader(new FileReader(filename, StandardCharsets.UTF_8))) {
 
@@ -42,7 +42,6 @@ public class FileBackedTasksManager extends InMemoryTaskManager {
 
                     switch (c[1]) {
                         case ("TASK"):
-
                             super.Tasks.put(Integer.parseInt(c[0]), fromString(s));
                             super.taskCount++;
                             break;
@@ -179,8 +178,8 @@ public class FileBackedTasksManager extends InMemoryTaskManager {
         return s;
     }
 
-    static FileBackedTasksManager loadFromFile(File file) {
-        FileBackedTasksManager tmgr = new FileBackedTasksManager(file);
+    static FileBackedTasksManager loadFromFile(String filename) {
+        FileBackedTasksManager tmgr = new FileBackedTasksManager(filename);
         return tmgr;
     }
 
@@ -233,12 +232,12 @@ public class FileBackedTasksManager extends InMemoryTaskManager {
                 return null;
         }
     }
-/*
-    public static void main(String[] args) {
-        System.out.println("FileBackedTasksManager.main  start");
-        TaskManager tmgrn = Managers.getDefault();
 
-        System.out.println("tmgrn.history: " + tmgrn.history());
-        System.out.println("FileBackedTasksManager.main  end");
-    }*/
+    public String getFilename() {
+        return filename;
+    }
+
+    public void setFilename(String filename) {
+        this.filename = filename;
+    }
 }

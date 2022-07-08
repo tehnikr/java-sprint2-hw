@@ -17,6 +17,7 @@ public class InMemoryTaskManager implements TaskManager {
     protected HashMap<Integer, Epic> Epics;
 
     protected HistoryManager historyManager = new InMemoryHistoryManager();
+    //protected InMemoryHistoryManager historyManager = new InMemoryHistoryManager();
 
     public InMemoryTaskManager() {
         Tasks = new HashMap<>();
@@ -271,4 +272,34 @@ public class InMemoryTaskManager implements TaskManager {
     HistoryManager getHistoryManager() {
         return historyManager;
     }
+
+    public HashMap getTasksHashMap (){
+        return Tasks;
+    }
+
+    public void setTasksHashMap (HashMap Tasks){
+        this.Tasks = Tasks;
+    }
+
+    public HashMap getEpicsHashMap (){
+        return Epics;
+    }
+
+    public void setEpicsHashMap (HashMap Epics){
+        this.Epics = Epics;
+    }
+
+    public int getTaskCount (){
+        return taskCount;
+    }
+
+    public void setTaskCount (int taskCount){
+        this.taskCount = taskCount;
+    }
+
+    public InMemoryHistoryManager getInMemoryHistoryManager (){
+        return (InMemoryHistoryManager) historyManager;
+    }
+
+
 }

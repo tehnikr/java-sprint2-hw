@@ -8,7 +8,7 @@ public class Main {
     public static void main(String[] args) throws IOException {
         System.out.println("Пришло время практики!");
 
-        //Managers mgr = new ("tasks.csv");
+        new KVServer().start();
 
         TaskManager tmgr = Managers.getDefault();
         HistoryManager hmgr = Managers.getDefaultHistory();
@@ -16,12 +16,7 @@ public class Main {
 
         httpTaskSrv.start();
 
-        /* String JsonTmgr = new Gson().toJson(tmgr);
-        System.out.println("JsonTmgr: " + JsonTmgr);
-
-
-
-
+        /*
         tmgr.addNewTask("Задача 1", "Описание задачи 1");
         tmgr.addNewTask("Задача 2", "Описание задачи 2");
 
@@ -57,7 +52,7 @@ public class Main {
         System.out.println("История: " + hmgr.getHistory());
 
         tmgr.getSubtask(5);
-        System.out.println("История: " + hmgr.getHistory());
+        System.out.println("История: " + hmgr.getHistory());/*
 
         hmgr.remove(3);
         System.out.println("История: " + hmgr.getHistory());

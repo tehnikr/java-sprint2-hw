@@ -1,13 +1,22 @@
 package mgr;
 
 import java.io.File;
+import java.io.IOException;
 
 public class Managers {
     static String filename = "tasks.csv";
     static String urlKVServer = "http://localhost:8078";
+    static HTTPTaskManager httpMgr;
 
-    //static FileBackedTasksManager httpMgr = FileBackedTasksManager.loadFromFile(new File(filename));
-    static FileBackedTasksManager httpMgr = HTTPTaskManager.loadFromURL(urlKVServer);
+    static {
+        try {
+            httpMgr = new HTTPTaskManager(urlKVServer);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 
     public static TaskManager getDefault() {
         return httpMgr;

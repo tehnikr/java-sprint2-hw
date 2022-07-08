@@ -78,7 +78,7 @@ public class InMemoryHistoryManager implements HistoryManager {
         }
     }
 
-    private List<Task> getTasks() {
+    public List<Task> getTasks() {
         ArrayList<Task> historyListToRet = new ArrayList<>();
 
         if (historyLL.size() != 0) {
@@ -139,5 +139,37 @@ public class InMemoryHistoryManager implements HistoryManager {
             result = result + tempList.get(tempList.size() - 1).getId();
         }
         return result;
+    }
+
+    public int getSize() {
+        return size;
+    }
+
+    public Integer getFirst() {
+        return first;
+    }
+
+    public Integer getLast() {
+        return last;
+    }
+
+    public HashMap<Integer, Node> getHistoryLL() {
+        return historyLL;
+    }
+
+    public void setSize(int size) {
+        this.size = size;
+    }
+
+    public void setFirst(Integer first) {
+        this.first = first;
+    }
+
+    public void setLast(Integer last) {
+        this.last = last;
+    }
+
+    public void setHistoryLL(HashMap<Integer, Node> historyLL) {
+        this.historyLL = historyLL;
     }
 }

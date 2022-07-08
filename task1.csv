@@ -1,4 +1,6 @@
 id,type,name,status,description,epic
-0,TASK,Test addNewTask,NEW_TASK,Test addNewTask description
+0,TASK,task0,DONE_TASK,task0description
+3,TASK,task3,NEW_TASK,task3description
+2,TASK,task2,NEW_TASK,task2description
 
-0
+2,0
